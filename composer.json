@@ -1,7 +1,7 @@
 {
   "name": "burdz/offer",
   "type": "magento2-component",
-  "license": "The Unlicensed",
+  "license": "Unlicense",
   "authors": [
     {
       "name": "David BUROS",
