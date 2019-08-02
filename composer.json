@@ -27,7 +27,7 @@
       "src/module-offerz/registration.php"
     ],
     "psr-4": {
-      "Burdz\\Offerz\\": "src/module-offerz",
+      "Burdz\\Offerz\\": "src/module-offerz"
     }
   },
   "minimum-stability": "dev",
