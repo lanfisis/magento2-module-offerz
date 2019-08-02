@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @category  Burdz
+ * @package   Burdz\Offerz
+ * @author    David Buros <david.buros@gmail.com>
+ * @licence   The Unlicense
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+<!--    <head>
+        <link src="legacy-build.min.js"/>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+    </head>-->
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="burdz_offerz_offer_form"/>
+        </referenceContainer>
+    </body>
+</page>

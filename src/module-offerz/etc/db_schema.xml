@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Burdz
+ * @package   Burdz\Offerz
+ * @author    David Buros <david.buros@gmail.com>
+ * @licence   The Unlicense
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="burdz_offerz_offer" resource="default" engine="innodb" comment="Burdz Offerz Offer Table">
+        <column xsi:type="int" name="offer_id" padding="10" unsigned="false" nullable="false" identity="true" comment="Offer ID"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="255" comment="Offer Label"/>
+        <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Offer Image"/>
+        <column xsi:type="text" name="image_info" nullable="false" comment="Offer Image Info"/>
+        <column xsi:type="varchar" name="link" nullable="false" length="255" comment="Offer Link"/>
+        <column xsi:type="timestamp" name="from_date" on_update="false" nullable="true" comment="Offer From Date"/>
+        <column xsi:type="timestamp" name="to_date" on_update="true" nullable="true" comment="Offer To Date"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Offer Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Offer Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="offer_id"/>
+        </constraint>
+    </table>
+    <table name="burdz_offerz_offer_category" resource="default" engine="innodb" comment="Offer To Category Linkage Table">
+        <column xsi:type="int" name="offer_id" padding="10" unsigned="false" nullable="false" identity="false" comment="Offer ID"/>
+        <column xsi:type="int" name="category_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Category ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="offer_id"/>
+            <column name="category_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="BURDZ_OFFERZ_OFFER_CATEGORY_OFFER_ID_OFFER_ID" table="burdz_offerz_offer_category" column="offer_id" referenceTable="burdz_offerz_offer" referenceColumn="offer_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="BURDZ_OFFERZ_OFFER_CATEGORY_CATEGORY_ID_ENTITY_ID" table="burdz_offerz_offer_category" column="category_id" referenceTable="catalog_category_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+</schema>

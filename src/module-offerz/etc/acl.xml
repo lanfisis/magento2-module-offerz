@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Burdz
+ * @package   Burdz\Offerz
+ * @author    David Buros <david.buros@gmail.com>
+ * @licence   The Unlicense
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Burdz_Offerz::burdz" title="Burdz" translate="title" sortOrder="11">
+                    <resource id="Burdz_Offerz::burdz_offerz" title="Offerz" translate="title" sortOrder="10">
+                        <resource id="Burdz_Offerz::burdz_offerz_offer" title="Category Offers" translate="title" sortOrder="10">
+                            <resource id="Burdz_Offerz::burdz_offerz_offer_list" title="List" translate="title" sortOrder="10"/>
+                            <resource id="Burdz_Offerz::burdz_offerz_offer_add" title="Add" translate="title" sortOrder="20"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

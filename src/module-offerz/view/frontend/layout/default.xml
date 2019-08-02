@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Burdz
+ * @package   Burdz\Offerz
+ * @author    David Buros <david.buros@gmail.com>
+ * @licence   The Unlicense
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.product.list.additional">
+            <block class="Burdz\Offerz\Block\Offer" name="category_offer" template="Burdz_Offerz::offer.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

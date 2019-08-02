@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Burdz
+ * @package   Burdz\Offerz
+ * @author    David Buros <david.buros@gmail.com>
+ * @licence   The Unlicense
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Burdz_Offerz::css/burdz-style.css"/>
+    </head>
+</page>

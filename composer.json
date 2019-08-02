@@ -1,0 +1,55 @@
+{
+  "name": "burdz/offer",
+  "type": "magento2-component",
+  "license": "The Unlicensed",
+  "authors": [
+    {
+      "name": "David BUROS",
+      "email": "david.buros@gmail.com"
+    }
+  ],
+  "description": "Magento 2 offer module for categories",
+  "homepage": "https://github.com/davidburos/magento2-module-offerz",
+  "keywords": [
+    "magento2"
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repo.magento.com/"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+  },
+  "autoload": {
+    "files": [
+      "src/module-offerz/registration.php"
+    ],
+    "psr-4": {
+      "Smile\\ElasticsuiteCore\\": "src/module-elasticsuite-core",
+      "Smile\\ElasticsuiteAdminNotification\\": "src/module-elasticsuite-admin-notification",
+      "Smile\\ElasticsuiteAnalytics\\": "src/module-elasticsuite-analytics",
+      "Smile\\ElasticsuiteCatalog\\": "src/module-elasticsuite-catalog",
+      "Smile\\ElasticsuiteCatalogOptimizer\\": "src/module-elasticsuite-catalog-optimizer",
+      "Smile\\ElasticsuiteCatalogRule\\": "src/module-elasticsuite-catalog-rule",
+      "Smile\\ElasticsuiteSwatches\\": "src/module-elasticsuite-swatches",
+      "Smile\\ElasticsuiteThesaurus\\": "src/module-elasticsuite-thesaurus",
+      "Smile\\ElasticsuiteTracker\\": "src/module-elasticsuite-tracker",
+      "Smile\\ElasticsuiteVirtualCategory\\": "src/module-elasticsuite-virtual-category"
+    }
+  },
+  "extra": {
+    "map": [
+      [
+        "src/lib/web/fonts/elasticsuite",
+        "lib/web/fonts/elasticsuite"
+      ]
+    ],
+    "branch-alias" : {
+      "dev-master" : "2.9.x-dev"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @category  Burdz
+ * @package   Burdz\Offerz
+ * @author    David Buros <david.buros@gmail.com>
+ * @licence   The Unlicense
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Burdz\Offerz\Api\Data\OfferInterface" type="Burdz\Offerz\Model\Offer"/>
+    <preference for="Burdz\Offerz\Api\OfferSearchResultInterface" type="Burdz\Offerz\Model\OfferSearchResult"/>
+    <preference for="Burdz\Offerz\Api\OfferRepositoryInterface" type="Burdz\Offerz\Repository\OfferRepository"/>
+    <preference for="Burdz\Offerz\Api\OfferManagementInterface" type="Burdz\Offerz\Service\OfferManagement"/>
+    <virtualType name="Burdz\Offerz\Resource\Offer\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">burdz_offerz_offer</argument>
+            <argument name="resourceModel" xsi:type="string">Burdz\Offerz\Resource\Offer\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="burdz_offerz_offer_listing_data_source" xsi:type="string">Burdz\Offerz\Resource\Offer\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

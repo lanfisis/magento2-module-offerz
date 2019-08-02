@@ -1,0 +1,29 @@
+{
+    "burdz_offerz_offer": {
+        "column": {
+            "offer_id": true,
+            "label": true,
+            "image": true,
+            "image_info": true,
+            "link": true,
+            "from_date": true,
+            "to_date": true,
+            "creation_time": true,
+            "update_time": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "burdz_offerz_offer_category": {
+        "column": {
+            "offer_id": true,
+            "category_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "BURDZ_OFFERZ_OFFER_CATEGORY_OFFER_ID_BURDZ_OFFERZ_OFFER_OFFER_ID": true,
+            "BURDZ_OFFERZ_OFFER_CTGR_CTGR_ID_CAT_CTGR_ENTT_ENTT_ID": true
+        }
+    }
+}
