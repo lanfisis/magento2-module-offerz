@@ -5,7 +5,11 @@ This module allow to display an offer on a category page
 
 ## Install
 
-Play the following commands   
+to install the module, play the following commands   
 
-`$ composer require burdz/magento2-module-offer`
-`$ php bin/magento module:enable Burdz_Offerz`
+```shell
+$ composer require burdz/magento2-module-offer
+$ php bin/magento module:enable Burdz_Offerz
+$ php bin/magento setup:upgrade
+```
+
