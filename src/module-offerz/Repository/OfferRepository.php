@@ -14,6 +14,8 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Catalog\Model\Category;
+use Magento\Framework\App\CacheInterface;
 
 /**
  * @category  Burdz
@@ -49,24 +51,32 @@ class OfferRepository implements OfferRepositoryInterface
     protected $collectionProcessor;
 
     /**
+     * @var \Magento\Framework\App\CacheInterface
+     */
+    protected $cacheManager;
+
+    /**
      * @param \Burdz\Offerz\Resource\Offer $offerResource
      * @param \Burdz\Offerz\Api\Data\OfferInterfaceFactory $offerFactory
      * @param \Burdz\Offerz\Api\OfferSearchResultInterfaceFactory $searchResultsFactory
      * @param \Burdz\Offerz\Resource\Offer\CollectionFactory $offerCollectionFactory
      * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
+     * @param \Magento\Framework\App\CacheInterface $cacheManager
      */
     public function __construct(
         OfferResource $offerResource,
         OfferInterfaceFactory $offerFactory,
         OfferSearchResultInterfaceFactory $searchResultsFactory,
         CollectionFactory $offerCollectionFactory,
-        CollectionProcessorInterface $collectionProcessor
+        CollectionProcessorInterface $collectionProcessor,
+        CacheInterface $cacheManager
     ) {
         $this->offerResource = $offerResource;
         $this->offerFactory = $offerFactory;
         $this->searchResultsFactory = $searchResultsFactory;
         $this->offerCollectionFactory = $offerCollectionFactory;
         $this->collectionProcessor = $collectionProcessor;
+        $this->cacheManager = $cacheManager;
     }
 
     /**
@@ -138,13 +148,15 @@ class OfferRepository implements OfferRepositoryInterface
         }
         $linkTable = $this->offerResource->getConnection()->getTableName(OfferInterface::TABLE_LINK_NAME);
         $this->offerResource->getConnection()->delete($linkTable, ['offer_id <= ?' => $offer->getId()]);
-        $insert = [];
+        $insert = $tags = [];
         foreach ($categoryIds as $id) {
+            $tags[] = Category::CACHE_TAG . '_' . $id;
             $insert[] = [
                 'offer_id' => $offer->getId(),
                 'category_id' => $id,
             ];
         }
+        $this->cacheManager->clean($tags);
         $this->offerResource->getConnection()->insertMultiple($linkTable, $insert);
         return $offer;
     }
@@ -182,6 +194,7 @@ class OfferRepository implements OfferRepositoryInterface
     public function getList(SearchCriteriaInterface $criteria): OfferSearchResultInterface
     {
         $collection = $this->offerCollectionFactory->create();
+        $collection->hasCategoryLink(true);
         $this->collectionProcessor->process($criteria, $collection);
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);

@@ -10,7 +10,11 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="category.product.list.additional">
-            <block class="Burdz\Offerz\Block\Offer" name="category_offer" template="Burdz_Offerz::offer.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="category_offer" template="Burdz_Offerz::offer.phtml" before="-">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Burdz\Offerz\ViewModel\Offer</argument>
+                </arguments>
+            </block>
         </referenceBlock>
     </body>
 </page>

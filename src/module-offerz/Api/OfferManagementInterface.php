@@ -10,5 +10,10 @@ namespace Burdz\Offerz\Api;
  */
 interface OfferManagementInterface
 {
-
+    /**
+     * @param int $id
+     * @return \Burdz\Offerz\Api\OfferSearchResultInterface
+     * @throws \Exception
+     */
+    public function getActiveOffersFromCategory(int $id): OfferSearchResultInterface;
 }
