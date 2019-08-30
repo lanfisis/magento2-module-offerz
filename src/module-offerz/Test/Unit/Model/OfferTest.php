@@ -71,5 +71,16 @@ class OfferTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($expected, $actual);
     }
 
+    /**
+     * @return void
+     */
+    public function testSetOfferId()
+    {
+        $offerId = 15;
+        $this->offerModel->setOfferId($offerId);
+        $expected = $offerId;
+        $actual = $this->offerModel->getData(OfferInterface::FIELD_OFFER_ID);
+        self::assertEquals($expected, $actual);
+    }
 
 }

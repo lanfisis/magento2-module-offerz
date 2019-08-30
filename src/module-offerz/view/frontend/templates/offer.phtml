@@ -9,8 +9,14 @@ $offers = $block->getViewModel()->getCurrentOffers();
 ?>
 <?php if($offers->getTotalCount() > 0):?>
     <?php foreach($offers->getItems() as $offer):?>
-        <h1><?php echo $offer->getLabel();?></h1>
-        <img src="<?php echo $block->getViewModel()->getImageUrl($offer->getImage());?>" width="100%" />
+        <div id="category-offer-<?php echo $offer->getId();?>" class="category-offer">
+            <img src="<?php echo $block->getViewModel()->getImageUrl($offer->getImage());?>" alt="<?php echo $offer->getLabel();?>"/>
+            <div class="cta primary">
+                <a href="<?php echo $offer->getLink();?>" target="_blank" class="action create primary">
+                    <span><?php echo __('Click to discover this offer');?></span>
+                </a>
+            </div>
+        </div>
     <?php endforeach?>
 <?php endif?>
 

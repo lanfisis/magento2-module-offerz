@@ -9,6 +9,7 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\FilterGroupBuilder;
 use Burdz\Offerz\Api\OfferSearchResultInterface;
+use Magento\Framework\Api\AbstractSimpleObject;
 
 /**
  * @category  Burdz
@@ -65,51 +66,33 @@ class OfferManagement implements OfferManagementInterface
     public function getActiveOffersFromCategory(int $id): OfferSearchResultInterface
     {
         $criteria = $this->searchCriteriaBuilder;
+        $categoryFilter = $this->createFilter('category_id', 'eq', $id);
+        $categoryGroup = $this->filterGroupBuilder->addFilter($categoryFilter)->create();
 
-        $categoryFilter = $this->filterBuilder
-            ->setField('category_id')
-            ->setConditionType('eq')
-            ->setValue($id)
-            ->create();
+        $fromDateValueFilter = $this->createFilter('from_date', 'gteq', (new \DateTime())->format('Y-m-d H:i:s'));
+        $fromDateNullFilter = $this->createFilter('from_date', 'null', null);
+        $fromDateGroup = $this->filterGroupBuilder->addFilter($fromDateValueFilter)->addFilter($fromDateNullFilter)->create();
 
-        $categoryGroup = $this->filterGroupBuilder
-            ->addFilter($categoryFilter)
-            ->create();
+        $toDateValueFilter = $this->createFilter('to_date', 'gteq', (new \DateTime())->format('Y-m-d H:i:s'));
+        $toDateNullFilter = $this->createFilter('to_date', 'null', null);
+        $toDateGroup = $this->filterGroupBuilder->addFilter($fromDateValueFilter)->addFilter($fromDateNullFilter)->create();
 
-        $fromDateValueFilter = $this->filterBuilder
-            ->setField('from_date')
-            ->setConditionType('lteq')
-            ->setValue((new \DateTime())->format('Y-m-d H:i:s'))
-            ->create();
-
-        $fromDateNullFilter = $this->filterBuilder
-            ->setField('from_date')
-            ->setConditionType('null')
-            ->setValue(null)
-            ->create();
-
-        $fromDateGroup = $this->filterGroupBuilder
-            ->addFilter($fromDateValueFilter)
-            ->addFilter($fromDateNullFilter)
-            ->create();
-
-        $toDateValueFilter = $this->filterBuilder
-            ->setField('from_date')
-            ->setConditionType('lteq')
-            ->setValue((new \DateTime())->format('Y-m-d H:i:s'))
-            ->create();
-
-        $toDateNullFilter = $this->filterBuilder
-            ->setField('from_date')
-            ->setConditionType('null')
-            ->setValue(null)
-            ->create();
-
-        $toDateGroup = $this->filterGroupBuilder
-            ->addFilter($fromDateValueFilter)
-            ->addFilter($fromDateNullFilter)
-            ->create();
         $criteria->setFilterGroups([$categoryGroup, $fromDateGroup, $toDateGroup]);
         return $this->offerRepository->getList($criteria->create());
+    }
+
+    /**
+     * @param string $field
+     * @param string $condition
+     * @param $value
+     * @return \Magento\Framework\Api\AbstractSimpleObject
+     */
+    protected function createFilter(string $field, string $condition, $value): AbstractSimpleObject
+    {
+        return $this->filterBuilder
+            ->setField($field)
+            ->setConditionType($condition)
+            ->setValue($value)
+            ->create();
     }
 }
